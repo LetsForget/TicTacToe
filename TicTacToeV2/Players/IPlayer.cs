@@ -9,7 +9,7 @@ namespace TicTacToeV2
 {
     public interface IPlayer
     {
-        State Sign { get; set; }
+        ICellable Cell { get; set; }
         Map Map { get; set; }
         void MakeAMove();
     }

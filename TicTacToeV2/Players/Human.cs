@@ -9,11 +9,11 @@ namespace TicTacToeV2.Players
 {
     public class Human : IPlayer
     {
-        public State Sign { get; set; }
+        public ICellable Cell { get; set; }
         public Map Map { get; set; }
         public void MakeAMove()
         {
-            int SelectedCell = CatchCursor();
+           // int SelectedCell = CatchCursor();
             
         }
     }

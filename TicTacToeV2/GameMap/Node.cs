@@ -16,21 +16,9 @@ namespace TicTacToeV2.GameMap
         {
             Map = map;
         }
-        public void Build(int depth, State sign, State enemy)
+        public void Build(int depth, ICellable cell, ICellable enemyCell)
         {
-            if (depth == 0)
-                return;
-            State first;
-
-            if (Map.QuantityOfSpecialCells(sign) > Map.QuantityOfSpecialCells(enemy))
-                first = enemy;
-            else
-                first = sign;
-
-            for (int i = 0; i < Map.Cells.Length; i++)
-                Childs.Add(new Node(Map.Set(i, first)));
-            foreach (Node t in Childs)
-                t.Build(depth--, sign, enemy);
+           
         }
         private void EvaluatingFunction()
         {

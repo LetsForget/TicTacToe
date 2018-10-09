@@ -9,18 +9,15 @@ namespace TicTacToeV2.Players
 {
     public class Computer : IPlayer
     {
-        public State Sign { get; set; }
-        public State EnemySign { get; set; }
+        public ICellable Cell { get; set; }
+        public ICellable EnemyCell { get; set; }
         public Map Map { get; set; }
 
-        Computer(Map map, State sign)
+        Computer(Map map, ICellable cell, ICellable enemyCell)
         {
             Map = map;
-            Sign = sign;
-            if (Sign == State.Tac)
-                EnemySign = State.Tic;
-            else
-                EnemySign = State.Tac;
+            Cell = cell;
+            EnemyCell = enemyCell;
         }
         public void MakeAMove()
         {
@@ -28,8 +25,7 @@ namespace TicTacToeV2.Players
         }
         private void CalculateMove()
         {
-            Node search = new Node(Map);
-            search.Build(2, Sign, EnemySign)
+
         }
     }
 }
