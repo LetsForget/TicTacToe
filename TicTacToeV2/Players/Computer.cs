@@ -11,21 +11,36 @@ namespace TicTacToeV2.Players
     {
         public ICellable Cell { get; set; }
         public ICellable EnemyCell { get; set; }
-        public Map Map { get; set; }
+        public Map Map
+        {
+            get
+            {
+                return _map;
+            }
+            set
+            {
+                _map = Map;
+            }
+        }
+        private Map _map;
+        private Node STree;
 
-        Computer(Map map, ICellable cell, ICellable enemyCell)
+        public Computer(Map map, ICellable cell, ICellable enemyCell)
         {
             Map = map;
             Cell = cell;
             EnemyCell = enemyCell;
+            STree = new Node(map);
         }
         public void MakeAMove()
         {
 
         }
-        private void CalculateMove()
+        public void CalculateMove(int lengthtowin, int depth)
         {
+            STree.BuildATree(lengthtowin, depth, Cell, EnemyCell);
 
         }
+        
     }
 }

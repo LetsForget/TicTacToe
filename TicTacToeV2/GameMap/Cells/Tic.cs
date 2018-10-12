@@ -15,13 +15,20 @@ namespace TicTacToeV2.GameMap
         {
             get
             {
-                return State;
+                return _state;
             }
             set
             {
-                State = State.Tic;
+                _state = State.Tic;
             }
         }
+        State _state;
+        public Tic()
+        {
+            State = State.Tic;
+        }
+        public int Weight { get; set; }
+
         public void Paint(int i, int j, PictureBox pb, Map map)
         {
             Point UpperLeftCorner = new Point(Convert.ToInt32(((float)i / map.Height) * pb.Height),

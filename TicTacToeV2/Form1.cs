@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToeV2.GameMap;
-
+using TicTacToeV2.Players;
 namespace TicTacToeV2
 {
     public partial class Form1 : Form
@@ -16,6 +16,8 @@ namespace TicTacToeV2
         static public Graphics g;
         private Painter p;
         private Map map = new Map(3, 3);
+        private Tic first = new Tic();
+        private Tac second = new Tac();
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +35,10 @@ namespace TicTacToeV2
             g = pictureBox1.CreateGraphics();
             p = new Painter(g, pictureBox1);
             p.PaintMap(map);
+            
+            Computer Comp = new Computer(map, first, second);
+            Comp.CalculateMove(3, 2);
+            int b = 3;
         }
     }
 }
