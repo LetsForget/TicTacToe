@@ -13,7 +13,6 @@ namespace TicTacToeV2.GameMap
     public interface ICellable
     {
         State State { get; set; }
-        int Weight { get; set; }
         void Paint(int i, int j, PictureBox pb, Map map);
         
     }

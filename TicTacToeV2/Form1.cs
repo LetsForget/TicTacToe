@@ -37,8 +37,23 @@ namespace TicTacToeV2
             p.PaintMap(map);
             
             Computer Comp = new Computer(map, first, second);
-            Comp.CalculateMove(3, 2);
-            int b = 3;
+            Computer Comp2 = new Computer(map, second, first);
+           
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            p.PaintMap(map);
+
+            Computer Comp = new Computer(map, first, second);
+            Comp.MakeAMove(3, 2);
+            map = Comp.Map;
+            p.PaintMap(map);
+
+            Computer Comp2 = new Computer(map, second, first);
+            Comp2.MakeAMove(3, 2);
+            map = Comp2.Map;
+            p.PaintMap(map);
         }
     }
 }

@@ -40,6 +40,8 @@ namespace TicTacToeV2.GameMap
                     MaxWeightNode = Childs[i];
                 }
         }
+
+
         public void BuildATree(int lengthtowin, int depth, ICellable cell, ICellable enemyCell)
         {
             if (depth == 0)
@@ -47,13 +49,21 @@ namespace TicTacToeV2.GameMap
             int cellsQuantity = Map.ReturnQuantityOfCells(cell);
             int enemyCellsQuantity = Map.ReturnQuantityOfCells(enemyCell);
 
-            if (cellsQuantity > enemyCellsQuantity)
+            if (cellsQuantity < enemyCellsQuantity)
                 Move(Map, cell, enemyCell, lengthtowin);
             else
                 Move(Map, enemyCell, cell, lengthtowin);
 
             foreach (Node t in Childs)
-                BuildATree(lengthtowin, depth - 1, cell, enemyCell);
+                t.BuildATree(lengthtowin, depth - 1, cell, enemyCell);
+        }
+        public void BuildAStartTree(int lengthtowin, int depth, ICellable cell, ICellable enemyCell)
+        {
+            if (depth == 0)
+                return;
+            Move(Map, cell, enemyCell, lengthtowin);
+            foreach (Node t in Childs)
+                t.BuildATree(lengthtowin, depth - 1, cell, enemyCell);
         }
     }
 

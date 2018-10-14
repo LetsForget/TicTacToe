@@ -27,7 +27,6 @@ namespace TicTacToeV2.GameMap
         {
             State = State.Tic;
         }
-        public int Weight { get; set; }
 
         public void Paint(int i, int j, PictureBox pb, Map map)
         {

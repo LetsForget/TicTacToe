@@ -11,7 +11,7 @@ namespace TicTacToeV2.Players
     {
         public ICellable Cell { get; set; }
         public Map Map { get; set; }
-        public void MakeAMove()
+        public void MakeAMove(int lengthtowin, int depth)
         {
            // int SelectedCell = CatchCursor();
             

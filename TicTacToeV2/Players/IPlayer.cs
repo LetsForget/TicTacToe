@@ -11,6 +11,6 @@ namespace TicTacToeV2
     {
         ICellable Cell { get; set; }
         Map Map { get; set; }
-        void MakeAMove();
+        void MakeAMove(int lengthtowin, int depth);
     }
 }
