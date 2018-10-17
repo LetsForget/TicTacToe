@@ -11,8 +11,7 @@ namespace TicTacToeV2.GameMap
     {
         public List<Node> Childs = new List<Node>();
         public Map Map;
-        public Node MaxWeightNode;
-
+        public Node NextMove;
         public Node(Map map)
         {
             Map = map;
@@ -32,15 +31,18 @@ namespace TicTacToeV2.GameMap
                 return;
 
             int weight = Childs[0].Map.ReturnWeight(lengthtowin, cell, enemyCell);
-            MaxWeightNode = Childs[0];
+            NextMove = Childs[0];
             for (int i = 1; i < Childs.Count; i++)
                 if (Childs[i].Map.ReturnWeight(lengthtowin,cell,enemyCell) > weight)
                 {
                     weight = Childs[i].Map.ReturnWeight(lengthtowin, cell, enemyCell);
-                    MaxWeightNode = Childs[i];
+                    NextMove = Childs[i];
                 }
         }
-
+        private void FindWeight()
+        {
+ 
+        }
 
         public void BuildATree(int lengthtowin, int depth, ICellable cell, ICellable enemyCell)
         {

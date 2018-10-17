@@ -14,8 +14,24 @@ namespace TicTacToeV2
         public IPlayer SecondPlayer;
         public Map Map;
         
-        public void Start()
+        public GameSession(IPlayer first, IPlayer second, Map map)
         {
+            FirstPlayer = first;
+            SecondPlayer = second;
+            Map = map;
+        }
+        public void Start(int lengthtowin, int depth)
+        {
+            for(; ; )
+            {
+                FirstPlayer.MakeAMove(lengthtowin, depth);
+                Map = FirstPlayer.Map;
+                SecondPlayer.Map = FirstPlayer.Map;
+                
+                SecondPlayer.MakeAMove(lengthtowin, depth);
+                Map = SecondPlayer.Map;
+                FirstPlayer.Map = SecondPlayer.Map;
+            }
 
         }
     }

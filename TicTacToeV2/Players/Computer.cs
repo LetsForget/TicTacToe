@@ -39,7 +39,7 @@ namespace TicTacToeV2.Players
             else
                 CalculateMove(lengthtowin, depth);
 
-            STree = STree.MaxWeightNode;
+            STree = STree.NextMove;
             _map = STree.Map;
 
         }

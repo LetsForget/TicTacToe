@@ -29,5 +29,9 @@ namespace TicTacToeV2
                 for (int j = 0; j < width; j++)
                     map.Cells[i * width + j].Paint(i, j, Pb, map);
         }
+        //public int CatchCursor(Map map)
+        //{
+
+        //}
     }
 }

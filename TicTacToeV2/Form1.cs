@@ -35,9 +35,7 @@ namespace TicTacToeV2
             g = pictureBox1.CreateGraphics();
             p = new Painter(g, pictureBox1);
             p.PaintMap(map);
-            
-            Computer Comp = new Computer(map, first, second);
-            Computer Comp2 = new Computer(map, second, first);
+ 
            
         }
 
@@ -50,10 +48,23 @@ namespace TicTacToeV2
             map = Comp.Map;
             p.PaintMap(map);
 
-            Computer Comp2 = new Computer(map, second, first);
-            Comp2.MakeAMove(3, 2);
-            map = Comp2.Map;
-            p.PaintMap(map);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Point target = PointToClient(MousePosition);
+
+            int width = pictureBox1.Width;
+            int height = pictureBox1.Height;
+
+            for (int i = 0; i < map.Height; i++)
+                for (int j = 0; j < map.Width; j++)
+                    if (((float)(i + 1) / map.Height) * height > target.X && ((float)(j + 1) / map.Width) * width > target.Y)
+                    {
+                        map.Cells[i * map.Width + j] = new Tac();
+                        p.PaintMap(map);
+                        return;
+                    }
         }
     }
 }
