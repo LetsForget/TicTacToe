@@ -11,6 +11,6 @@ namespace TicTacToeV2
     {
         void MakeaMove(int i);
         void Update(int i);
-        ICellable ReturnSign();
     }
+
 }

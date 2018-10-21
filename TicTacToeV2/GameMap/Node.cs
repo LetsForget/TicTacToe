@@ -9,63 +9,45 @@ namespace TicTacToeV2.GameMap
 {
     public class Node
     {
-        public List<Node> Childs = new List<Node>();
         public Map Map;
-        public Node NextMove;
-        public Node(Map map)
+        public List<Node> Childs;
+        public IPlayer Player;
+        public IPlayer Enemy;
+
+        public Node(Map map, IPlayer pl, IPlayer en)
         {
             Map = map;
+            Player = pl;
+            Enemy = en;
+            Childs = new List<Node>();
         }
-        public void Move(Map map, ICellable cell, ICellable enemyCell, int lengthtowin)
+        public void OwnMove(int depth)
         {
-            int length = map.Cells.Length;
+            Move(depth, Player);
+            foreach (Node ch in Childs)
+                ch.EnemyMove(depth - 1);
+        }
+        public void EnemyMove(int depth)
+        {
+            Move(depth, Enemy);
+            foreach (Node ch in Childs)
+                ch.EnemyMove(depth - 1);
+        }
+        private void Move(int depth, IPlayer Author)
+        {
+            if (depth == 0)
+                return;
 
-            for (int i = 0; i < length; i++)
-                if (map.Cells[i].State == State.Toe)
+            int len = Map.Cells.Length;
+            ICellable playerSign = Author.ReturnSign();
+
+            for (int i = 0; i < len; i++)
+                if (Map.Cells[i].State == State.Toe)
                 {
-                    Node newChild = new Node(map.ReturnChangedMap(i, cell));
+                    Map childMap = Map.ReturnChangedMap(i, playerSign);
+                    Node newChild = new Node(childMap, Player, Enemy);
                     Childs.Add(newChild);
                 }
-
-            if (Childs.Count == 0)
-                return;
-
-            int weight = Childs[0].Map.ReturnWeight(lengthtowin, cell, enemyCell);
-            NextMove = Childs[0];
-            for (int i = 1; i < Childs.Count; i++)
-                if (Childs[i].Map.ReturnWeight(lengthtowin,cell,enemyCell) > weight)
-                {
-                    weight = Childs[i].Map.ReturnWeight(lengthtowin, cell, enemyCell);
-                    NextMove = Childs[i];
-                }
-        }
-        private void FindWeight()
-        {
- 
-        }
-
-        public void BuildATree(int lengthtowin, int depth, ICellable cell, ICellable enemyCell)
-        {
-            if (depth == 0)
-                return;
-            int cellsQuantity = Map.ReturnQuantityOfCells(cell);
-            int enemyCellsQuantity = Map.ReturnQuantityOfCells(enemyCell);
-
-            if (cellsQuantity < enemyCellsQuantity)
-                Move(Map, cell, enemyCell, lengthtowin);
-            else
-                Move(Map, enemyCell, cell, lengthtowin);
-
-            foreach (Node t in Childs)
-                t.BuildATree(lengthtowin, depth - 1, cell, enemyCell);
-        }
-        public void BuildAStartTree(int lengthtowin, int depth, ICellable cell, ICellable enemyCell)
-        {
-            if (depth == 0)
-                return;
-            Move(Map, cell, enemyCell, lengthtowin);
-            foreach (Node t in Childs)
-                t.BuildATree(lengthtowin, depth - 1, cell, enemyCell);
         }
     }
 

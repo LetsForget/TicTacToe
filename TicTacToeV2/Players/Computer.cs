@@ -4,54 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TicTacToeV2.GameMap;
-using TicTacToeV2.GameMap.Cells;
+
 namespace TicTacToeV2.Players
 {
     public class Computer : IPlayer
     {
-        public ICellable Cell { get; set; }
-        public ICellable EnemyCell { get; set; }
-        public Map Map
-        {
-            get
-            {
-                return _map;
-            }
-            set
-            {
-                _map = Map;
-            }
-        }
-        private Map _map;
-        private Node STree;
+        public GameSession Gs;
+        public ICellable Sign;
 
-        public Computer(Map map, ICellable cell, ICellable enemyCell)
+        public Computer(ICellable sign, GameSession gs)
         {
-            _map = map;
-            Cell = cell;
-            EnemyCell = enemyCell;
-            STree = new Node(map);
+            Sign = sign;
+            Gs = gs;
         }
-        public void MakeAMove(int lengthtowin, int depth)
+        public void MakeaMove(int i)
         {
-            if (Map.ReturnQuantityOfCells(new Toe()) == Map.Width * Map.Height)
-                CalculateFirstMove(lengthtowin, depth);
-            else
-                CalculateMove(lengthtowin, depth);
-
-            STree = STree.NextMove;
-            _map = STree.Map;
-
+            Node sTree = new Node(Gs.Map,this, Gs.HistoryOfMoves.Last().Author);
+            sTree.OwnMove(Gs.DepthOfCalculating);
+            
         }
-        public void CalculateFirstMove(int lengthtowin, int depth)
+        public void Update(int i)
         {
-            STree.BuildAStartTree(lengthtowin, depth, Cell, EnemyCell);
+            if (Gs.HistoryOfMoves.Last().Author != this)
+                MakeaMove(i);
         }
-        public void CalculateMove(int lengthtowin, int depth)
+        public ICellable ReturnSign()
         {
-            STree.BuildATree(lengthtowin, depth, Cell, EnemyCell);
-
+            return Sign;
         }
-        
     }
 }

@@ -59,10 +59,11 @@
     <Compile Include="GameMap\Cells\Toe.cs" />
     <Compile Include="GameSession.cs" />
     <Compile Include="GameMap\Node.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="Painter.cs" />
     <Compile Include="Players\Computer.cs" />
-    <Compile Include="Players\Human.cs" />
     <Compile Include="Players\IPlayer.cs" />
+    <Compile Include="Players\Human.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

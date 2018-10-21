@@ -15,9 +15,10 @@ namespace TicTacToeV2
     {
         static public Graphics g;
         private Painter p;
-        private Map map = new Map(3, 3);
+        private Map map = new Map(6, 6);
         private Tic first = new Tic();
         private Tac second = new Tac();
+        private GameSession Gs = new GameSession();
         public Form1()
         {
             InitializeComponent();
@@ -32,39 +33,38 @@ namespace TicTacToeV2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            g = pictureBox1.CreateGraphics();
             p = new Painter(g, pictureBox1);
-            p.PaintMap(map);
- 
-           
+            Gs.DepthOfCalculating = 2;
+            Gs.AddPlayer(new Human(first,Gs));
+            Gs.AddPlayer(new Computer(second, Gs));
+            p.PaintMap(Gs.Map);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            p.PaintMap(map);
-
-            Computer Comp = new Computer(map, first, second);
-            Comp.MakeAMove(3, 2);
-            map = Comp.Map;
-            p.PaintMap(map);
-
+            int b = 43;
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             Point target = PointToClient(MousePosition);
 
-            int width = pictureBox1.Width;
-            int height = pictureBox1.Height;
+            float wid = pictureBox1.Width;
+            float hei = pictureBox1.Height;
+            float mapW = Gs.Map.Width;
+            float mapH = Gs.Map.Height;
+            float X = target.X;
+            float Y = target.Y;
 
-            for (int i = 0; i < map.Height; i++)
-                for (int j = 0; j < map.Width; j++)
-                    if (((float)(i + 1) / map.Height) * height > target.X && ((float)(j + 1) / map.Width) * width > target.Y)
+            for (int i = 0; i < mapH; i++)
+                for (int j = 0; j < mapW; j++)
+                    if ( ((i + 1) / mapH) * hei > X && ((j + 1) / mapW) * wid > Y)
                     {
-                        map.Cells[i * map.Width + j] = new Tac();
-                        p.PaintMap(map);
+                        Gs.NotifyPlayers(i * Gs.Map.Width + j);
+                        p.PaintMap(Gs.Map);
                         return;
                     }
         }
+
     }
 }

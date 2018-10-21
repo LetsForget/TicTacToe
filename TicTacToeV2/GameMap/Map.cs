@@ -26,10 +26,15 @@ namespace TicTacToeV2.GameMap
         {
             return Cells.Where(t => t.State == cell.State).Count();
         }
-        public Map ReturnChangedMap(int i, ICellable cell)
+        public Map CopyThis()
         {
             Map Temp = new Map(Width, Height);
             Cells.CopyTo(Temp.Cells, 0);
+            return Temp;
+        }
+        public Map ReturnChangedMap(int i, ICellable cell)
+        {
+            Map Temp = CopyThis();
             Temp.Cells[i] = cell;
             return Temp;
         }
