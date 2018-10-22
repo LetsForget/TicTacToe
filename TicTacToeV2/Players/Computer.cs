@@ -21,7 +21,14 @@ namespace TicTacToeV2.Players
         {
             Node sTree = new Node(Gs.Map,this, Gs.HistoryOfMoves.Last().Author);
             sTree.OwnMove(Gs.DepthOfCalculating);
-            
+            sTree.SetWeights(Gs.LentgthToWin);
+            Node BestMove = sTree.Childs[0];
+            for (int j = 1; j < sTree.Childs.Count; j++)
+                if (BestMove.Weight < sTree.Childs[j].Weight)
+                    BestMove = sTree.Childs[j];
+            Gs.Map = BestMove.Map;
+            Gs.HistoryOfMoves.Add(new Move(this, Gs.Map));
+            Gs.NotifyPlayers(i);
         }
         public void Update(int i)
         {

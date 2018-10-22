@@ -35,6 +35,7 @@ namespace TicTacToeV2
         {
             p = new Painter(g, pictureBox1);
             Gs.DepthOfCalculating = 2;
+            Gs.LentgthToWin = 3;
             Gs.AddPlayer(new Human(first,Gs));
             Gs.AddPlayer(new Computer(second, Gs));
             p.PaintMap(Gs.Map);

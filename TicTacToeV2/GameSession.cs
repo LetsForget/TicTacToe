@@ -20,7 +20,7 @@ namespace TicTacToeV2
         {
             Players = new List<IPlayer>();
             HistoryOfMoves = new List<Move>();
-            Map = new Map(6, 6);
+            Map = new Map(3, 3);
         }
         public void AddPlayer(IPlayer player)
         {

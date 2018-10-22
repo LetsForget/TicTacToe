@@ -24,13 +24,13 @@ namespace TicTacToeV2.Players
         }
         public void Update(int i)
         {
-            if  (Gs.HistoryOfMoves.Count() == 0)
-            {
-                MakeaMove(i);
-                return;
-            }
-            if (Gs.HistoryOfMoves.Last().Author != this)
-                MakeaMove(i);
+            //if  (Gs.HistoryOfMoves.Count() == 0)
+            //{
+            //    MakeaMove(i);
+            //    return;
+            //}
+            //if (Gs.HistoryOfMoves.Last().Author != this)
+            //    MakeaMove(i);
         }
         public ICellable ReturnSign()
         {
