@@ -33,6 +33,7 @@ namespace TicTacToeV2.GameMap
             Childs = new List<Node>();
         }
         #endregion
+
         #region Building a tree
         public void OwnMove(int depth)
         {
@@ -45,7 +46,7 @@ namespace TicTacToeV2.GameMap
         {
             Move(depth, Enemy);
             foreach (Node ch in Childs)
-                ch.EnemyMove(depth - 1);
+                ch.OwnMove(depth - 1);
         }       
         private void Move(int depth, IPlayer Author)
         {
@@ -64,6 +65,7 @@ namespace TicTacToeV2.GameMap
                 }
         }
         #endregion
+
         #region Calculating weights
         private int ReturnMaximalChildWeight(int lengthtowin)
         {

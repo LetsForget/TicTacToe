@@ -28,7 +28,7 @@ namespace TicTacToeV2.Players
                     BestMove = sTree.Childs[j];
             Gs.Map = BestMove.Map;
             Gs.HistoryOfMoves.Add(new Move(this, Gs.Map));
-            Gs.NotifyPlayers(i);
+            Gs.NotifyPlayers(-1);
         }
         public void Update(int i)
         {

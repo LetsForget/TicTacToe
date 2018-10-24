@@ -34,7 +34,7 @@ namespace TicTacToeV2
         private void button1_Click(object sender, EventArgs e)
         {
             p = new Painter(g, pictureBox1);
-            Gs.DepthOfCalculating = 2;
+            Gs.DepthOfCalculating = 6;
             Gs.LentgthToWin = 3;
             Gs.AddPlayer(new Human(first,Gs));
             Gs.AddPlayer(new Computer(second, Gs));
@@ -54,8 +54,8 @@ namespace TicTacToeV2
             float hei = pictureBox1.Height;
             float mapW = Gs.Map.Width;
             float mapH = Gs.Map.Height;
-            float X = target.X;
-            float Y = target.Y;
+            float X = target.Y;
+            float Y = target.X;
 
             for (int i = 0; i < mapH; i++)
                 for (int j = 0; j < mapW; j++)

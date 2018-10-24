@@ -76,6 +76,8 @@ namespace TicTacToeV2.GameMap
         }
         private int ReturnNumberOfHorizWins(int i, int lengthtowin, ICellable cell)
         {
+            if (Cells[i].State != cell.State)
+                return 0;
             if (Width - i % Width < lengthtowin)
                 return 0;
             for (int j = i; j < i + lengthtowin; j++)
@@ -88,6 +90,8 @@ namespace TicTacToeV2.GameMap
         }
         private int ReturnNumberOfVertWins(int i, int lengthtowin, ICellable cell)
         {
+            if (Cells[i].State != cell.State)
+                return 0;
             if (Height - i / Width < lengthtowin)
                 return 0;
             for (int j = i; j < i + lengthtowin * Width; j += Width)
@@ -104,6 +108,8 @@ namespace TicTacToeV2.GameMap
         }
         private int ReturnNumberOfLDiagWins(int i, int lengthtowin, ICellable cell)
         {
+            if (Cells[i].State != cell.State)
+                return 0;
             if (Width - i % Width < lengthtowin || Height - i / Width < lengthtowin)
                 return 0;
             for (int j = i; j < i + lengthtowin * Width + lengthtowin; j += Width + 1)
@@ -116,7 +122,9 @@ namespace TicTacToeV2.GameMap
         }
         private int ReturnNumberOfRDiagWins(int i, int lengthtowin, ICellable cell)
         {
-            if (Width - i % Width > lengthtowin + 1 || Height - i / Width < lengthtowin)
+            if (Cells[i].State != cell.State)
+                return 0;
+            if (i % Width - (lengthtowin - 1) < 0 || Height - i / Width < lengthtowin)
                 return 0;
             for (int j = i; j < i + lengthtowin * Width - lengthtowin; j += Width - 1)
                 if (Cells[j].State != cell.State && Cells[j].State != State.Toe)
