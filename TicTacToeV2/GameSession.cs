@@ -30,8 +30,16 @@ namespace TicTacToeV2
         {
             Players.Remove(player);
         }
+
+        public void StopGame()
+        {
+            Players.Clear();
+        }
+
         public void NotifyPlayers(int i)
         {
+            if (Players.Count == 0)
+                return;
             foreach (IPlayer p in Players)
                 p.Update(i);
         }

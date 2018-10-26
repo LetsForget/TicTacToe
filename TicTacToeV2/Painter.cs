@@ -22,6 +22,8 @@ namespace TicTacToeV2
         }
         public void PaintMap(Map map)
         {
+            G = Pb.CreateGraphics();
+            G.Clear(Color.Yellow);
             int width = map.Width;
             int height = map.Height;
 

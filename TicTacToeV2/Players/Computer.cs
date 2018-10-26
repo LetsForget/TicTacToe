@@ -19,8 +19,10 @@ namespace TicTacToeV2.Players
         }
         public void MakeaMove(int i)
         {
-            Node sTree = new Node(Gs.Map,this, Gs.HistoryOfMoves.Last().Author);
+            Node sTree = new Node(Gs.Map,this, Gs.HistoryOfMoves.Last().Author,Gs.LentgthToWin);
             sTree.OwnMove(Gs.DepthOfCalculating);
+            if (sTree.Childs.Count == 0)
+                return;
             sTree.SetWeights(Gs.LentgthToWin);
             Node BestMove = sTree.Childs[0];
             for (int j = 1; j < sTree.Childs.Count; j++)

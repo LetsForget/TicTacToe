@@ -33,11 +33,17 @@ namespace TicTacToeV2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             p = new Painter(g, pictureBox1);
-            Gs.DepthOfCalculating = 6;
-            Gs.LentgthToWin = 3;
-            Gs.AddPlayer(new Human(first,Gs));
+            Gs.DepthOfCalculating = Convert.ToInt32(Depth.Value);
+            int GsMapWidth = Convert.ToInt32(Width.Value);
+            int GsMapHeight = Convert.ToInt32(Height.Value);
+            Gs.Map = new Map(GsMapWidth, GsMapHeight);
+            Gs.LentgthToWin = Convert.ToInt32(LengthToWin.Value);
+            Gs.Players.Clear();
+            Gs.AddPlayer(new Human(first, Gs));
             Gs.AddPlayer(new Computer(second, Gs));
+
             p.PaintMap(Gs.Map);
         }
 
