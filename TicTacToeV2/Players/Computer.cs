@@ -21,8 +21,7 @@ namespace TicTacToeV2.Players
         {
             Node sTree = new Node(Gs.Map,this, Gs.HistoryOfMoves.Last().Author,Gs.LentgthToWin);
             sTree.OwnMove(Gs.DepthOfCalculating);
-            if (sTree.Childs.Count == 0)
-                return;
+           
             sTree.SetWeights(Gs.LentgthToWin);
             Node BestMove = sTree.Childs[0];
             for (int j = 1; j < sTree.Childs.Count; j++)
@@ -30,6 +29,15 @@ namespace TicTacToeV2.Players
                     BestMove = sTree.Childs[j];
             Gs.Map = BestMove.Map;
             Gs.HistoryOfMoves.Add(new Move(this, Gs.Map));
+
+            Node CheckTree = new Node(Gs.Map, sTree.Enemy, sTree.Player, Gs.LentgthToWin);
+            CheckTree.OwnMove(2);
+            if (CheckTree.Childs.Count == 0)
+            {
+                Gs.StopGame();
+                return;
+            }
+
             Gs.NotifyPlayers(-1);
         }
         public void Update(int i)

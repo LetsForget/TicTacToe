@@ -109,25 +109,25 @@ namespace TicTacToeV2.GameMap
             var minWeight = childsWeights.Min();
             return minWeight;
         }
-        private int EndChildMaximalWeight()
+
+        private List<int> EndChild()
         {
             List<int> childsWeights = new List<int>();
             ICellable pl = Player.ReturnSign();
             ICellable en = Enemy.ReturnSign();
             foreach (Node ch in Childs)
                 childsWeights.Add(ch.Map.ReturnWeight(Lengthtowin, pl, en));
-            var maxWeight = childsWeights.Max();
-            return maxWeight;
+
+            return childsWeights;
+        }
+
+        private int EndChildMaximalWeight()
+        {
+            return EndChild().Max();
         }
         private int EndChildMinimalWeight()
         {
-            List<int> childsWeights = new List<int>();
-            ICellable pl = Player.ReturnSign();
-            ICellable en = Enemy.ReturnSign();
-            foreach (Node ch in Childs)
-                childsWeights.Add(ch.Map.ReturnWeight(Lengthtowin, pl, en));
-            var minWeight = childsWeights.Min();
-            return minWeight;
+            return EndChild().Min();
         }
         public void SetWeights(int lengthtowin)
         {

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TicTacToeV2.GameMap;
 using TicTacToeV2.Players;
+using TicTacToeV2.GameMap.Cells;
+
 namespace TicTacToeV2
 {
     public partial class Form1 : Form
@@ -22,8 +24,7 @@ namespace TicTacToeV2
         public Form1()
         {
             InitializeComponent();
-            
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -67,6 +68,8 @@ namespace TicTacToeV2
                 for (int j = 0; j < mapW; j++)
                     if ( ((i + 1) / mapH) * hei > X && ((j + 1) / mapW) * wid > Y)
                     {
+                        if (Gs.Map.Cells[i * Gs.Map.Width + j].State != GameMap.Cells.State.Toe)
+                            return;
                         Gs.NotifyPlayers(i * Gs.Map.Width + j);
                         p.PaintMap(Gs.Map);
                         return;

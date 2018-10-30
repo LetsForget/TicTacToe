@@ -15,12 +15,13 @@ namespace TicTacToeV2
         public Map Map;
         public int LentgthToWin;
         public int DepthOfCalculating;
-
+        private bool GameIsOver;
         public GameSession()
         {
             Players = new List<IPlayer>();
             HistoryOfMoves = new List<Move>();
             Map = new Map(3, 3);
+            GameIsOver = false;
         }
         public void AddPlayer(IPlayer player)
         {
@@ -33,12 +34,12 @@ namespace TicTacToeV2
 
         public void StopGame()
         {
-            Players.Clear();
+            GameIsOver = true;
         }
 
         public void NotifyPlayers(int i)
         {
-            if (Players.Count == 0)
+            if (GameIsOver == true)
                 return;
             foreach (IPlayer p in Players)
                 p.Update(i);
